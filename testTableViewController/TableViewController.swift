@@ -12,15 +12,15 @@ class TableViewController: UITableViewController {
     let a = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
     
     
-   @IBAction func move(_ sender: Any) {
-        let storyboard: UIStoryboard = self.storyboard!
-        if let second = storyboard.instantiateViewController(withIdentifier:"next") as? ViewController {
-            second.b = a
-//            second.delegate = self
-            self.present(second, animated: true, completion: nil)
+//   @IBAction func move(_ sender: Any) {
+//        let storyboard: UIStoryboard = self.storyboard!
+//        if let second = storyboard.instantiateViewController(withIdentifier:"next") as? ViewController {
+//            second.b = a
+////            second.delegate = self
+//            self.present(second, animated: true, completion: nil)
     
     
-            func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
 
         // Uncomment the following line to preserve selection between presentations
@@ -30,28 +30,30 @@ class TableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
-            func didReceiveMemoryWarning() {
+    override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
     // MARK: - Table view data source
 
-            func numberOfSections(in tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
-            func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return a.count
     }
 
     
-            func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath)
 
         // Configure the cell...
+        tableView.deselectRow(at: indexPath, animated: true)
+        performSegue(withIdentifier: "next", sender: nil)
         cell.textLabel!.text = a[indexPath.row]
 
         return cell
